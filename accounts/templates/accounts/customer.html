@@ -1,0 +1,57 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md">
+      <div class="card card-body">
+        <h5 class="card-title">Customer</h5>
+        <hr />
+        <a class="btn btn-outline-info btn-sm btn-block my-1">Update Customer</a>
+        <a class="btn btn-outline-danger btn-sm btn-block my-1">Delete Customer</a>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="card card-body">
+        <h5 class="card-title">Contact Information</h5>
+        <hr />
+        <p>Email:</p>
+        <p>Phone:</p>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="card card-body">
+        <h5 class="card-title">Total Orders</h5>
+        <hr />
+        <h1 class="text-center">1</h1>
+      </div>
+    </div>
+  </div>
+
+  {% comment %}Search{% endcomment %}
+  <br />
+  <div class="row">
+    <div class="col-md">
+      <div class="card card-body">
+        <form class="d-flex" role="search" action="get">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {% comment %}List{% endcomment %}
+  <br />
+  <div class="card card-body">
+    <table class="table">
+        <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Date Ordered</th>
+            <th>Status</th>
+            <th>Update</th>
+            <th>Removed</th>
+        </tr>
+    </table>
+  </div>
+{% endblock %}
