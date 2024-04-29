@@ -1,0 +1,13 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+  <div class="container align-items-center justify-content-center d-flex flex-column" style="height: 70vh;">
+    <h3>Do you really want to delete <span class="text-warning">{{ order.product }}</span> of <span class="text-info">{{ order.customer }}</span></h3>
+    <br />
+    <form enctype="multipart/form-data" method="post">
+      {% csrf_token %}
+      <a href="{% url 'accounts:dashboard' %}" class="btn btn-success mx-2">Cancle</a>
+      <input type="submit" value="Confirm" class="btn btn-danger mx-2" />
+    </form>
+  </div>
+{% endblock %}

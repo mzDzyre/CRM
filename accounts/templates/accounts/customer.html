@@ -11,18 +11,22 @@
       </div>
     </div>
     <div class="col-md">
-      <div class="card card-body">
+      <div class="card card-body bg-body-secondary">
         <h5 class="card-title">Contact Information</h5>
         <hr />
-        <p>Email:</p>
-        <p>Phone:</p>
+        <p>
+          Email: <span class="text-light-emphasis">{{ customers.email }}</span>
+        </p>
+        <p>
+          Phone: <span class="text-light-emphasis">{{ customers.phone }}</span>
+        </p>
       </div>
     </div>
     <div class="col-md">
       <div class="card card-body">
         <h5 class="card-title">Total Orders</h5>
         <hr />
-        <h1 class="text-center">1</h1>
+        <h1 class="text-center">{{ total_orders }}</h1>
       </div>
     </div>
   </div>
@@ -43,15 +47,29 @@
   {% comment %}List{% endcomment %}
   <br />
   <div class="card card-body">
-    <table class="table">
+    <table class="table table-striped-columns">
+      <tr>
+        <th>Product</th>
+        <th>Category</th>
+        <th>Date Ordered</th>
+        <th>Status</th>
+        <th>Update</th>
+        <th>Removed</th>
+      </tr>
+      {% for order in orders %}
         <tr>
-            <th>Product</th>
-            <th>Category</th>
-            <th>Date Ordered</th>
-            <th>Status</th>
-            <th>Update</th>
-            <th>Removed</th>
+          <td>{{ order.product.product_name }}</td>
+          <td>{{ order.product.category }}</td>
+          <td>{{ order.date_created }}</td>
+          <td>{{ order.status }}</td>
+          <td>
+            <a class="btn btn-sm btn-outline-secondary" href="{% url 'accounts:update_order' order.id %}">Update</a>
+          </td>
+          <td>
+            <a class="btn btn-sm btn-danger" href="{% url 'accounts:delete_order' order.id %}">Delete</a>
+          </td>
         </tr>
+      {% endfor %}
     </table>
   </div>
 {% endblock %}
