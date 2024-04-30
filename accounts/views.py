@@ -35,26 +35,14 @@ def customer(request, id):
 
 def createCustomer(request):
     form = CreateCustomer()
-    # customers = Customer.objects.all()
-    # orders = Order.objects.all()
-    # total_orders = orders.count()
-    # pending_orders = Order.objects.filter(status="Pending").count()
-    # delivered_orders = Order.objects.filter(status="Delivered").count()
-    if request.method == 'POST':
+    if request.method == "POST":
         data = request.POST
         form = CreateCustomer(data)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect("/")
 
-    context = {
-        # "customers": customers,
-        # "orders": orders,
-        # "total_orders": total_orders,
-        # "pending_orders": pending_orders,
-        # "delivered_orders": delivered_orders,
-        "form": form
-    }
+    context = {"form": form}
     return render(request, "accounts/createCustomer.html", context)
 
 
