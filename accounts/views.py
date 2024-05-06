@@ -3,6 +3,14 @@ from .models import *
 from .forms import *
 
 
+def userLogin(request):
+    context = {}
+    return render(request, 'accounts/login.html',context)
+
+def userRegister(request):
+    context = {}
+    return render(request, 'accounts/register.html',context)
+
 def dashboard(request):
     customers = Customer.objects.all()
     orders = Order.objects.all()
@@ -46,15 +54,36 @@ def createCustomer(request):
     return render(request, "accounts/createCustomer.html", context)
 
 
-def createOrder(request):
-    form = OrderForm()
+def createOrder(request, pk):
+    """AI is creating summary for createOrder
+
+    Args:
+        request ([type]): [description]
+        pk ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+    customer = Customer.objects.get(id=pk)
+    userform = OrderForm(initial={"customer": customer})
     if request.method == "POST":
         data = request.POST
-        form = OrderForm(data)
+        form = OrderForm(data, initial={"customer": customer})
         if form.is_valid():
             form.save()
-            return redirect("/")
-    context = {"form": form}
+            orders = customer.order_set.all()
+            total_orders = orders.count()
+            context = {
+                "customers": customer,
+                "orders": orders,
+                "total_orders": total_orders,
+            }
+            return render(request, "accounts/customer.html", context)
+
+        else:
+            print(data)
+            print("not valid")
+    context = {"form": userform}
     return render(request, "accounts/order_form.html", context)
 
 

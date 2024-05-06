@@ -47,6 +47,8 @@
   {% comment %}List{% endcomment %}
   <br />
   <div class="card card-body">
+    <a href="{% url "accounts:create_order" customers.id  %}" class="btn btn-primary">Create Order</a>
+    <br>
     <table class="table table-striped-columns">
       <tr>
         <th>Product</th>
